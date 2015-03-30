@@ -15,20 +15,32 @@
 
 
 
+  
+  
+  
+
+
+
 
     <button ng-click="tableParams.sorting({})" class="btn btn-default pull-right">Clear sorting</button>
     <p><strong>Sorting:</strong> {{tableParams.sorting()|json}}
      <p><strong>Filter:</strong> {{tableParams.filter()|json}}
 
     <table ng-table="tableParams"  show-filter="true" class="table">
-        <tr ng-repeat="user in $data">
+    
+        <tr ng-repeat="user in $data" ng-class="{even: $even, odd: $odd}"  >
 
-
-
+         
+            
             <td data-title="'Corresp'" sortable="'Corresp'"   filter="{ 'Corresp': 'text' }">
+            
                <span ng-if="!user.$edit">{{user.Corresp}}</span>
                 <div ng-if="user.$edit"><input class="form-control" type="text" ng-model="user.Corresp" /></div>
+                </span>
             </td>
+           
+       
+         
 
 
              <td data-title="'OwnerCited'" sortable="'OwnerCited'"   filter="{ 'OwnerCited': 'text' }">
@@ -38,14 +50,14 @@
             
 
             <td data-title="'TmCited'"  sortable="'TmCited'"    filter="{ 'TmCited': 'text' }">
-                <span ng-if="!user.$edit"><span>{{user.TmCited}} </span><br><a ng-href="https://tsdr.uspto.gov/#caseNumber={{user.SnCited}}&caseType=SERIAL_NO&searchType=statusSearch">    {{user.SnCited}} </a>  </span>
+                <span ng-if="!user.$edit"><span style="color:red" >{{user.TmCited}} </span><br><a target="_blank"   ng-href="https://tsdr.uspto.gov/#caseNumber={{user.SnCited}}&caseType=SERIAL_NO&searchType=statusSearch">    {{user.SnCited}} </a>  </span>
                 <div ng-if="user.$edit"><input class="form-control" type="text" ng-model="user.TmCited" /></div>
             </td>
 
 
 
              <td data-title="'TmRefused'"  sortable="'TmRefused'"    filter="{ 'TmRefused': 'text' }">
-                <span ng-if="!user.$edit"><span>{{user.TmRefused}} </span><br><a ng-href="https://tsdr.uspto.gov/#caseNumber={{user.SnRefused}}&caseType=SERIAL_NO&searchType=statusSearch">    {{user.SnRefused}} </a>  </span>
+                <span ng-if="!user.$edit"><span style="color:blue">{{user.TmRefused}} </span><br><a target="_blank" ng-href="https://tsdr.uspto.gov/#caseNumber={{user.SnRefused}}&caseType=SERIAL_NO&searchType=statusSearch">    {{user.SnRefused}} </a>  </span>
                 <div ng-if="user.$edit"><input class="form-control" type="text" ng-model="user.TmRefused" /></div>
             </td>
 
@@ -64,7 +76,14 @@
             </td>
 
         </tr>
+
     </table>
+
+
+   
+
+   
+
 
 </body>
 </html>
