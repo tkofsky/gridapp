@@ -12,6 +12,11 @@ $scope.saveLastPage = function(page){
     }
 };
 
+// HACK: manipulate the DOM from the controller (note: this is an angular anti-pattern / bad practice) to scroll to the top
+$scope.scrollToTop = function(){
+    $('body').scrollTop(0);
+};
+
 var mydata = [];
 var sortsetting={Corresp: 'asc'};
 var thefiltersetting={Corresp: ' '};
