@@ -21,11 +21,32 @@ var mydata = [];
 var sortsetting={Corresp: 'asc'};
 var thefiltersetting={Corresp: ' '};
 
-   $scope.save = function(){
+     $scope.save = function(){
      console.log($scope.mytableParams.data);
 
-     $http.post('savedata.php',mydata);
+     $http.post('savedata.php',mydata). success(function(data, status, headers, config) {
+    
+          $( "#successdiv" ).fadeIn( 300 ).delay( 1500 ).fadeOut( 400 );
+
+
+
+     });
+   
+  
    }
+
+
+ $scope.addedit = function(){
+     console.log('EDITED!!!!!!!!!!!');
+     
+
+       
+   }
+
+
+
+
+
 
     $http.get("current.json",{header : {'Content-Type' : 'application/json; Charset=UTF-8'}}).success(function(response){
             console.log(response);

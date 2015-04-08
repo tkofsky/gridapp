@@ -8,11 +8,44 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
-
+    
 
     <link rel="stylesheet" href="style.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="script.js"></script>
+
+  
+
+
+<style >
+@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap-glyphicons.css");
+.success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    display: none;
+}
+
+
+
+.zzz {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+   
+}
+
+.green
+{
+
+    color:green;
+}
+
+</style>
+
+
+
+
 </head>
 
 <body ng-app="main" ng-controller="MainCtrl">
@@ -20,6 +53,10 @@
 
 
 
+
+
+<div id="successdiv" class="success">Data saved on server...</div>
+ 
 
 
 
@@ -31,6 +68,9 @@
 
     <p><strong>Sorting by:</strong> {{mytableParams.sorting()|json}}</p>
     <p><strong>Filtering by:</strong> {{mytableParams.filter()|json}}</p>
+
+
+
 
     <table ng-table="mytableParams" template-pagination='custom/pager' show-filter="true" class="table">
 
@@ -66,14 +106,24 @@
 
 
             <td data-title="'TmCited'"  sortable="'TmCited'"    filter="{ 'TmCited': 'text' }">
-                <span ng-if="!user.$edit"><span style="color:red" >{{user.TmCited}} </span><br><a target="_blank"   ng-href="https://tsdr.uspto.gov/#caseNumber={{user.SnCited}}&caseType=SERIAL_NO&searchType=statusSearch">    {{user.SnCited}} </a>  </span>
+                <span ng-if="!user.$edit"><span style="color:red" >{{user.TmCited}}
+
+                 <div ng-show="user.TmCited=='[Design Mark]'"> <img  src="https://tsdr.uspto.gov/img/{{user.SnRefused}}/large" /></div>
+                 
+                 </span><br><a target="_blank"   ng-href="https://tsdr.uspto.gov/#caseNumber={{user.SnCited}}&caseType=SERIAL_NO&searchType=statusSearch">    {{user.SnCited}} </a>  </span>
                 <div ng-if="user.$edit"><input class="form-control" type="text" ng-model="user.TmCited" /></div>
             </td>
 
 
 
              <td data-title="'TmRefused'"  sortable="'TmRefused'"    filter="{ 'TmRefused': 'text' }">
-                <span ng-if="!user.$edit"><span style="color:blue">{{user.TmRefused}} </span><br><a target="_blank" ng-href="https://tsdr.uspto.gov/#caseNumber={{user.SnRefused}}&caseType=SERIAL_NO&searchType=statusSearch">    {{user.SnRefused}} </a>  </span>
+                <span ng-if="!user.$edit"><span style="color:blue">{{user.TmRefused}} 
+
+                <div ng-show="user.TmRefused=='[Design Mark]'"> <img  src="https://tsdr.uspto.gov/img/{{user.SnRefused}}/large" /></div>
+
+
+
+                </span><br><a target="_blank" ng-href="https://tsdr.uspto.gov/#caseNumber={{user.SnRefused}}&caseType=SERIAL_NO&searchType=statusSearch">    {{user.SnRefused}} </a>  </span>
                 <div ng-if="user.$edit"><input class="form-control" type="text" ng-model="user.TmRefused" /></div>
             </td>
 
@@ -86,9 +136,16 @@
 
 
 
-            <td data-title="'Actions'" width="200">
+            <td data-title="'Actions'" width="100">
                 <a ng-if="!user.$edit" href="" class="btn btn-default btn-xs" ng-click="user.$edit = true">Edit</a>
-                <a ng-if="user.$edit" href="" class="btn btn-primary btn-xs" ng-click="user.$edit = false">Save</a>
+                <a ng-if="user.$edit" href="" class="btn btn-primary btn-xs" ng-click="user.$edit = false;user.Edited=true">Save</a>
+            </td>
+
+
+
+            <td data-title="'Edited'" width="100"  >
+              <a   ng-click="user.Edited=false"  ng-show="user.Edited==true" class="glyphicon glyphicon-pencil green" ></a>
+              
             </td>
 
         </tr>
@@ -124,7 +181,7 @@
 </div>
 
 <div ng-show="params.page() == lastPage">
-    This is the last page!
+    *************************This is the last page!
 </div>
 </script>
 
